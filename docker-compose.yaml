@@ -1,0 +1,26 @@
+
+
+services:
+  frontend:
+    build: ./front-end
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:4000
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    ports:
+      - "4000:4000"
+    environment:
+      DATABASE_URL: postgres://$${$POSTGRES_USER}:$${POSTGRES_PASSWORD}@postgres:5432/$${$POSTGRES_DB}
+  postgres:
+      image: postgres:15
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: Arraystartswith0
+        POSTGRES_DB: closet-app
+      ports:
+        - "5432:5432"
