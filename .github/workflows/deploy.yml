@@ -7,13 +7,14 @@ on:
 
 jobs:
   deploy:
+    name: Deploy app on EC2
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: SSH and deploy
+      - name: Deploy via SSH
         uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.EC2_HOST }}
